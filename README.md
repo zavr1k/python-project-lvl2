@@ -4,4 +4,4 @@
 
 
 ##### Usage:
-[![asciicast](https://asciinema.org/a/ndlylZ6393ZlY7UAHCbwePeoH.svg)](https://asciinema.org/a/ndlylZ6393ZlY7UAHCbwePeoH)
+[![asciicast](https://asciinema.org/a/3zEocmgacvyFtu8vUN7ktWrvS.svg)](https://asciinema.org/a/3zEocmgacvyFtu8vUN7ktWrvS)
