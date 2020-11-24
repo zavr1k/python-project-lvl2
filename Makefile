@@ -1,13 +1,16 @@
 install:
-	poetry install
+		@poetry install
 
 build:
-	poetry build
+		@poetry build
 
 package-install:
-	pip install --user dist/*.whl
+		@pip install dist/*.whl
 
 lint:
-	poetry run flake8 gendiff
+		@poetry run flake8 gendiff
 
-.PHONY install lint build package-install
+uninstall:
+		@pip uninstall hexlet-code
+
+.PHONY: install lint build package-install
