@@ -50,4 +50,5 @@ def generate_diff(path_file1, path_file2):
     for d in diff:
         result += f' {d["status"]} {d["key"]}: {d["value"]}\n'
     result += '}'
+    result = result.replace('True', 'true').replace('False', 'false')
     return result
