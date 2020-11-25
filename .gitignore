@@ -4,3 +4,5 @@ __pycache__/
 dist/
 *.pyc
 htmlcov/
+.coverage
+coverage.xml
