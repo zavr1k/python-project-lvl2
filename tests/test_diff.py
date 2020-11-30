@@ -1,11 +1,11 @@
-from gendiff.gendiff import generate_diff, get_path
-from pathlib import Path
+from gendiff.gendiff import generate_diff
+from gendiff.file_parser import get_path
 
 
 def test_flat_json() -> None:
     reality = generate_diff(get_path('tests/fixtures/first.json'),
                             get_path('tests/fixtures/second.json'))
-    expectation = Path(get_path('tests/fixtures/result.txt')).read_text()
+    expectation = get_path('tests/fixtures/result.txt').read_text()
     assert reality == expectation
 
 
