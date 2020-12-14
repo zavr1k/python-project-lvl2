@@ -1,54 +1,30 @@
 from gendiff.file_parser import get_data
+from gendiff.statuses import ADDED, REMOVED, CHANGED, NO_CHANGED, NESTED
+from gendiff.format.stylish import stylish
 
 
-def generate_diff(filepath1, filepath2):
-    first_file = get_data(filepath1)
-    second_file = get_data(filepath2)
+def generate_diff(path_file1, path_file2):
+    data1 = get_data(path_file1)
+    data2 = get_data(path_file2)
+    diff = get_diff(data1, data2)
+    return stylish(diff)
 
-    #  Prepare keys
-    first_keys = first_file.keys()
-    second_keys = second_file.keys()
-    added_pos = second_keys - first_keys
-    removed_pos = first_keys - second_keys
-    all_keys = sorted(first_keys | second_keys)
 
-    #  Fill the difference
-    diff = []
-    for key in all_keys:
-        if key in added_pos:
-            diff.append({
-                'status': '+',
-                'key': key,
-                'value': second_file[key]
-            })
-        elif key in removed_pos:
-            diff.append({
-                'status': '-',
-                'key': key,
-                'value': first_file[key]
-            })
-        elif first_file[key] == second_file[key]:
-            diff.append({
-                'status': ' ',
-                'key': key,
-                'value': first_file[key]
-            })
+def get_diff(data1: dict, data2: dict) -> dict:
+    diff = {}
+    for key in data1.keys() - data2.keys():
+        diff[key] = (REMOVED, data1.get(key))
+    for key in data2.keys() - data1.keys():
+        diff[key] = (ADDED, data2.get(key))
+    for key in data1.keys() & data2.keys():
+        if isinstance(data1[key], dict) and isinstance(data2[key], dict):
+            if data1[key] == data2[key]:
+                diff[key] = (NO_CHANGED, data2[key])
+            else:
+                diff[key] = (NESTED, get_diff(data1[key], data2[key]))
         else:
-            diff.append({
-                'status': '-',
-                'key': key,
-                'value': first_file[key]
-            })
-            diff.append({
-                'status': '+',
-                'key': key,
-                'value': second_file[key]
-            })
-
-    #  Collecting the string
-    result = '{\n'
-    for d in diff:
-        result += f' {d["status"]} {d["key"]}: {d["value"]}\n'
-    result += '}'
-    result = result.replace('True', 'true').replace('False', 'false')
-    return result
+            if data1[key] == data2[key]:
+                diff[key] = (NO_CHANGED, data2[key])
+            else:
+                diff[key] = (CHANGED, (data1[key], data2[key]))
+    return diff
