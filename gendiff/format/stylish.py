@@ -18,7 +18,8 @@ def stylish(diff: dict, indent=2) -> str:
             result += f'{spacer}  {key}: {stylish(value, indent=indent + 4)}\n'
     else:
         result += f'{spacer[2:]}' + '}'
-    result = result.replace('True', 'true').replace('False', 'false').replace('None', 'null')
+    result = result.replace('True', 'true').replace('False', 'false').\
+        replace('None', 'null')
     return result
 
 
