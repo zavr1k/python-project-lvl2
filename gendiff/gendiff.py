@@ -3,11 +3,12 @@ from gendiff.statuses import ADDED, REMOVED, CHANGED, NO_CHANGED, NESTED
 from gendiff.format.stylish import stylish
 
 
-def generate_diff(path_file1, path_file2):
+def generate_diff(path_file1, path_file2, style='stylish'):
     data1 = get_data(path_file1)
     data2 = get_data(path_file2)
     diff = get_diff(data1, data2)
-    return stylish(diff)
+    if style == 'stylish':
+        return stylish(diff)
 
 
 def get_diff(data1: dict, data2: dict) -> dict:
