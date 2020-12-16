@@ -8,7 +8,7 @@ def main():
     parser.add_argument('first_file', type=str)
     parser.add_argument('second_file', type=str)
     parser.add_argument('--format', '-f', help='set format of output',
-                        default='stylish')
+                        default='stylish', choices=['stylish', 'plain'])
 
     args = parser.parse_args()
     print(generate_diff(args.first_file, args.second_file, args.format))

@@ -3,23 +3,31 @@ from gendiff.file_parser import get_path
 import pytest
 
 
-testdata = [
-    (get_path('tests/fixtures/first.json'),
-     get_path('tests/fixtures/second.json'),
+test_data = [
+    ('tests/fixtures/first.json',
+     'tests/fixtures/second.json',
+     'stylish',
      get_path('tests/fixtures/result.txt').read_text()),
-    (get_path('tests/fixtures/first.yml'),
-     get_path('tests/fixtures/second.yml'),
+    ('tests/fixtures/first.yml',
+     'tests/fixtures/second.yml',
+     'stylish',
      get_path('tests/fixtures/result.txt').read_text()),
-    (get_path('tests/fixtures/first_complex.json'),
-     get_path('tests/fixtures/second_complex.json'),
+    ('tests/fixtures/first_complex.json',
+     'tests/fixtures/second_complex.json',
+     'stylish',
      get_path('tests/fixtures/complex_result.txt').read_text()),
-    (get_path('tests/fixtures/first_complex.yml'),
-     get_path('tests/fixtures/second_complex.yml'),
+    ('tests/fixtures/first_complex.yml',
+     'tests/fixtures/second_complex.yml',
+     'stylish',
      get_path('tests/fixtures/complex_result.txt').read_text()),
+    ('tests/fixtures/first_complex.json',
+     'tests/fixtures/second_complex.json',
+     'plain',
+     get_path('tests/fixtures/plain_result.txt').read_text()),
 ]
 
 
-@pytest.mark.parametrize("a,b,expected", testdata)
-def test_diff(a, b, expected):
-    diff = generate_diff(a, b)
+@pytest.mark.parametrize("file1, file2, format_output, expected", test_data)
+def test_diff(file1, file2, format_output, expected):
+    diff = generate_diff(file1, file2, format_output)
     assert diff == expected
