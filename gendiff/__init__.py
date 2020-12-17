@@ -1,2 +1,2 @@
-from gendiff.gendiff import generate_diff
-import yaml
+from .gendiff import *
+__all__ = ['generate_diff']
