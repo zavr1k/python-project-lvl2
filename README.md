@@ -5,7 +5,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/a72a951cf53016c33f46/maintainability)](https://codeclimate.com/github/zavr1k/python-project-lvl2/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/a72a951cf53016c33f46/test_coverage)](https://codeclimate.com/github/zavr1k/python-project-lvl2/test_coverage)
 ______
-This is libryari to get the difference between two file. Supports formats: .json, .yml. For convenience it has several ways to display the difference.
+This is library to get the difference between two file. Supports formats: json, yml. For convenience it has several ways to display the difference.
 
 #### How to install:
 For install the library use this pip command ```pip install -i https://test.pypi.org/simple/ zavr-gendiff```
