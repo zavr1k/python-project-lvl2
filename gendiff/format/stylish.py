@@ -21,13 +21,18 @@ def stylish(diff: dict, indent=2) -> str:
 
 
 def prepare(value, indent):
-    if not isinstance(value, dict):
+    if isinstance(value, dict):
+        return prepare_dict(value, indent)
+    else:
         return value
+
+
+def prepare_dict(value, indent):
     spacer = ' ' * (indent + 6)
     result = '{\n'
     for key, value in value.items():
         if isinstance(value, dict):
-            result += f'{spacer}{key}: {prepare(value, indent+4)}\n'
+            result += f'{spacer}{key}: {prepare(value, indent + 4)}\n'
         else:
             result += f'{spacer}{key}: {value}\n'
     else:
