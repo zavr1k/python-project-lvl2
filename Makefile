@@ -17,4 +17,7 @@ coverage:
 		poetry run coverage run --source=gendiff -m pytest tests
 		poetry run coverage xml
 
+test:
+		poetry run pytest tests
+
 .PHONY: install lint build package-install

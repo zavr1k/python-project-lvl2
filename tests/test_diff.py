@@ -30,6 +30,4 @@ test_data = [
 @pytest.mark.parametrize("file1, file2, format_output, expected", test_data)
 def test_diff(file1, file2, format_output, expected):
     diff = generate_diff(file1, file2, format_output)
-    # assert diff
-    # == expected
-    assert 1 == 0
+    assert diff == expected
