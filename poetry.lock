@@ -146,7 +146,7 @@ toml = "*"
 testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "requests", "xmlschema"]
 
 [[package]]
-category = "dev"
+category = "main"
 description = "YAML parser and emitter for Python"
 name = "pyyaml"
 optional = false
@@ -162,7 +162,7 @@ python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 version = "0.10.2"
 
 [metadata]
-content-hash = "9b0d89d93625912b1120cee12d881f2fb0b3eecb6fa9ab672907d8ad8a1f3bc9"
+content-hash = "4ad85955815e958aa3de067f12480404ec69b996ebd63d583038a7b2ca88a294"
 lock-version = "1.0"
 python-versions = "^3.8"
 
