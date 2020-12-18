@@ -1,6 +1,7 @@
-import pathlib
-import yaml
 import json
+import pathlib
+
+import yaml
 
 
 def get_data(filepath):
