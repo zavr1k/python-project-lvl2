@@ -41,4 +41,7 @@
             }
         }
     }
+    no_changed: {
+        key-key: 100500
+    }
 }
