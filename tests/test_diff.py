@@ -48,11 +48,11 @@ def test_diff(file1, file2, output_format, expected):
     assert diff == expected
 
 
-def test_json_formatter():
-    diff = generate_diff(path_to('file1.json'), path_to('file2.json'), 'json')
-    json1 = json.loads(diff)
-    json2 = json.loads(read_file('result_json.json'))
-    assert json1 == json2
+# def test_json_formatter():
+#     diff = generate_diff(path_to('file1.json'), path_to('file2.json'), 'json')
+#     json1 = json.loads(diff)
+#     json2 = json.loads(read_file('result_json.json'))
+#     assert json1 == json2
 
 
 def test_invalid_file_name():

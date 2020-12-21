@@ -1,112 +1,126 @@
 {
-  "common": [
-    "NESTED",
+  "children": [
     {
-      "follow": [
-        "ADDED",
-        false
-      ],
-      "setting1": [
-        "NO_CHANGED",
-        "Value 1"
-      ],
-      "setting2": [
-        "REMOVED",
-        200
-      ],
-      "setting3": [
-        "CHANGED",
-        [
-          true,
-          null
-        ]
-      ],
-      "setting4": [
-        "ADDED",
-        "blah blah"
-      ],
-      "setting5": [
-        "ADDED",
-        {
-          "key5": "value5"
+      "key": "group3",
+      "type": "added",
+      "value": {
+        "deep": {
+          "id": {
+            "number": 45
+          }
+        },
+        "fee": 100500
+      }
+    },
+    {
+      "key": "group2",
+      "type": "removed",
+      "value": {
+        "abc": 12345,
+        "deep": {
+          "id": 45
         }
-      ],
-      "setting6": [
-        "NESTED",
+      }
+    },
+    {
+      "children": [
         {
-          "doge": [
-            "NESTED",
+          "key": "follow",
+          "type": "added",
+          "value": false
+        },
+        {
+          "key": "setting5",
+          "type": "added",
+          "value": {
+            "key5": "value5"
+          }
+        },
+        {
+          "key": "setting4",
+          "type": "added",
+          "value": "blah blah"
+        },
+        {
+          "key": "setting2",
+          "type": "removed",
+          "value": 200
+        },
+        {
+          "key": "setting1",
+          "type": "no changed",
+          "value": "Value 1"
+        },
+        {
+          "key": "setting3",
+          "new_value": null,
+          "old_value": true,
+          "type": "changed"
+        },
+        {
+          "children": [
             {
-              "wow": [
-                "CHANGED",
-                [
-                  "",
-                  "so much"
-                ]
-              ]
+              "key": "ops",
+              "type": "added",
+              "value": "vops"
+            },
+            {
+              "key": "key",
+              "type": "no changed",
+              "value": "value"
+            },
+            {
+              "children": [
+                {
+                  "key": "wow",
+                  "new_value": "so much",
+                  "old_value": "",
+                  "type": "changed"
+                }
+              ],
+              "key": "doge",
+              "type": "nested"
             }
           ],
-          "key": [
-            "NO_CHANGED",
-            "value"
-          ],
-          "ops": [
-            "ADDED",
-            "vops"
-          ]
+          "key": "setting6",
+          "type": "nested"
         }
-      ]
-    }
-  ],
-  "group1": [
-    "NESTED",
+      ],
+      "key": "common",
+      "type": "nested"
+    },
     {
-      "baz": [
-        "CHANGED",
-        [
-          "bas",
-          "bars"
-        ]
-      ],
-      "foo": [
-        "NO_CHANGED",
-        "bar"
-      ],
-      "nest": [
-        "CHANGED",
-        [
-          {
+      "children": [
+        {
+          "key": "nest",
+          "new_value": "str",
+          "old_value": {
             "key": "value"
           },
-          "str"
-        ]
-      ]
-    }
-  ],
-  "group2": [
-    "REMOVED",
+          "type": "changed"
+        },
+        {
+          "key": "baz",
+          "new_value": "bars",
+          "old_value": "bas",
+          "type": "changed"
+        },
+        {
+          "key": "foo",
+          "type": "no changed",
+          "value": "bar"
+        }
+      ],
+      "key": "group1",
+      "type": "nested"
+    },
     {
-      "abc": 12345,
-      "deep": {
-        "id": 45
+      "key": "no_changed",
+      "type": "no changed",
+      "value": {
+        "key-key": 100500
       }
     }
   ],
-  "group3": [
-    "ADDED",
-    {
-      "deep": {
-        "id": {
-          "number": 45
-        }
-      },
-      "fee": 100500
-    }
-  ],
-  "no_changed": [
-    "NO_CHANGED",
-    {
-      "key-key": 100500
-    }
-  ]
+  "type": "root"
 }
