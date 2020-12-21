@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import pytest
-import json
+# import json
 
 from gendiff.gendiff import generate_diff
 
