@@ -2,22 +2,6 @@ ADDED, REMOVED, CHANGED, NO_CHANGED, NESTED, ROOT = \
     'added', 'removed', 'changed', 'no changed', 'nested', 'root'
 
 
-def add_removed_key(key: str, file: dict) -> dict:
-    return {
-        'key': key,
-        'type': REMOVED,
-        'value': file[key]
-    }
-
-
-def add_added_key(key: str, file: dict) -> dict:
-    return {
-        'key': key,
-        'type': ADDED,
-        'value': file[key]
-    }
-
-
 def add_common_key(key: str, file1: dict, file2: dict) -> dict:
     if file1[key] == file2[key]:
         return {
@@ -42,16 +26,24 @@ def add_common_key(key: str, file1: dict, file2: dict) -> dict:
         }
 
 
-def add_children(data1: dict, data2: dict) -> list:
+def add_children(file1: dict, file2: dict) -> list:
     result = []
-    for key in data2.keys() - data1.keys():
-        result.append(add_added_key(key, data2))
+    for key in file2.keys() - file1.keys():
+        result.append({
+            'key': key,
+            'type': ADDED,
+            'value': file2[key]
+        })
 
-    for key in data1.keys() - data2.keys():
-        result.append(add_removed_key(key, data1))
+    for key in file1.keys() - file2.keys():
+        result.append({
+            'key': key,
+            'type': REMOVED,
+            'value': file1[key]
+        })
 
-    for key in data1.keys() & data2.keys():
-        result.append(add_common_key(key, data1, data2))
+    for key in file1.keys() & file2.keys():
+        result.append(add_common_key(key, file1, file2))
 
     return sorted(result, key=lambda x: x['key'])
 
