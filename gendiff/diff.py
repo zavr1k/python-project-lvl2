@@ -62,7 +62,7 @@ def add_children(data1: dict, data2: dict) -> list:
                 result.append(add_nested_key(key, data1[key], data2[key]))
             else:
                 result.append(add_changed_key(key, data1, data2))
-    return result
+    return sorted(result, key=lambda x: x['key'])
 
 
 def get_diff(file1: dict, file2: dict) -> dict:
