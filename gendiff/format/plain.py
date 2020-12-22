@@ -1,11 +1,6 @@
 from gendiff.diff import ADDED, REMOVED, CHANGED, NESTED
 
 
-def sort_children(children: list) -> list:
-    sorted_children = sorted(children, key=lambda x: x['key'])
-    return sorted_children
-
-
 def get_whole_path(key: str, parent: str) -> str:
     if parent:
         return f'{parent}.{key}'
@@ -22,8 +17,7 @@ def check_value(value):
 
 def to_plain(diff: dict, parent=None):
     strings = []
-    sorted_children = sort_children(diff['children'])
-    for n in sorted_children:
+    for n in diff['children']:
         path = get_whole_path(n['key'], parent)
         if n['type'] == ADDED:
             strings.append(f"Property '{path}' was added with value:"

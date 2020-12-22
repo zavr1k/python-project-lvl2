@@ -21,16 +21,10 @@ def prepare_dict(value, indent):
     return result
 
 
-def sort_children(children: list) -> list:
-    sorted_children = sorted(children, key=lambda x: x['key'])
-    return sorted_children
-
-
 def stylish(diff: dict, indent=2):
     spacer = ' ' * indent
-    sorted_children = sort_children(diff['children'])
     result = '{\n'
-    for n in sorted_children:
+    for n in diff['children']:
         if n['type'] == ADDED:
             result += f'{spacer}+ {n["key"]}: {prepare(n["value"], indent)}\n'
         elif n['type'] == REMOVED:
