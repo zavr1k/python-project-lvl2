@@ -19,23 +19,23 @@ def read_file(file_name: str):
 
 
 test_cases = [
-    (path_to('file1.json'),  # tests with two json files formatter - stylish
+    (path_to('file1.json'),
      path_to('file2.json'),
      'stylish',
      read_file('result_stylish.txt')),
-    (path_to('file1.yml'),  # tests with two yml files formatter - stylish
+    (path_to('file1.yml'),
      path_to('file2.yml'),
      'stylish',
      read_file('result_stylish.txt')),
-    (path_to('file1.yml'),  # tests with two yml files formatter - plain
+    (path_to('file1.yml'),
      path_to('file2.yml'),
      'plain',
      read_file('result_plain.txt')),
-    (path_to('file1.json'),  # tests with two json files formatter - plain
+    (path_to('file1.json'),
      path_to('file2.json'),
      'plain',
      read_file('result_plain.txt')),
-    (path_to('file1.json'),  # tests with different formats files
+    (path_to('file1.json'),
      path_to('file2.yml'),
      'stylish',
      read_file('result_stylish.txt'))
