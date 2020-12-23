@@ -1,4 +1,7 @@
 import argparse
+from gendiff.format.json import to_json
+from gendiff.format.plain import to_plain
+from gendiff.format.stylish import stylish
 
 
 def init_argparse():
@@ -11,3 +14,12 @@ def init_argparse():
                         choices=['stylish', 'plain', 'json']
                         )
     return parser
+
+
+def formatter(diff, style='stylish'):
+    if style == 'stylish':
+        return stylish(diff)
+    if style == 'plain':
+        return to_plain(diff)
+    if style == 'json':
+        return to_json(diff)
