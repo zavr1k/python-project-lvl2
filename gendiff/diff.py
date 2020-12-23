@@ -25,16 +25,15 @@ def add_children(file1: dict, file2: dict) -> list:
                 'type': NO_CHANGED,
                 'value': file2[key]
             })
-        elif (isinstance(file1[key], dict) and
-              isinstance(file2[key], dict)) \
+        elif (isinstance(file1[key], dict) and isinstance(file2[key], dict)) \
                 and file1[key] != file2[key]:
             result.append({
                 'key': key,
                 'type': NESTED,
                 'children': add_children(file1[key], file2[key])
             })
-        elif not (isinstance(file1[key], dict) and
-                  isinstance(file2[key], dict)) \
+        elif not (isinstance(file1[key], dict)
+                  and isinstance(file2[key], dict)) \
                 and file1[key] != file2[key]:
             result.append({
                 'key': key,
