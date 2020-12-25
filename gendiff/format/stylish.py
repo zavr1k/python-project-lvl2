@@ -1,4 +1,4 @@
-from gendiff.diff import ADDED, REMOVED, CHANGED, NO_CHANGED, NESTED
+from gendiff.tree import ADDED, REMOVED, CHANGED, NO_CHANGED, NESTED
 
 
 def prepare(value, indent):

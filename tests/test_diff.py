@@ -53,10 +53,3 @@ def test_json_formatter():
     json1 = json.loads(diff)
     json2 = json.loads(read_file('result_json.json'))
     assert json1 == json2
-
-
-def test_invalid_file_name():
-    try:
-        generate_diff(path_to('file1.txt'), path_to('file2.json'))
-    except FileNotFoundError:
-        assert True

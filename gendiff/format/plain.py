@@ -1,36 +1,47 @@
-from gendiff.diff import ADDED, REMOVED, CHANGED, NESTED
+from gendiff.tree import ADDED, REMOVED, CHANGED, NESTED
 
 
-def get_whole_path(key: str, parent: str) -> str:
-    if parent:
-        return f'{parent}.{key}'
-    return key
+def to_plain(diff: dict) -> str:
+    strings = add_children(diff['children'])
+    strings = list(filter(lambda l: l is not None, strings))
+    return '\n'.join(strings)
 
 
-def check_value(value):
+def add_children(children: list, ancestry=None) -> list:
+    strings = []
+    for child in children:
+        if ancestry is None:
+            attribute = child['key']
+        else:
+            attribute = f'{ancestry}.{child["key"]}'
+
+        if child['type'] == NESTED:
+            strings.extend(add_children(child["children"], attribute))
+        else:
+            strings.append(add_row(child, attribute))
+    return strings
+
+
+def add_row(child: dict, attribute: str):
+    if child['type'] == ADDED:
+        return f"Property '{attribute}' was added with value: " \
+               f"{prepare_value(child['value'])}"
+
+    elif child['type'] == REMOVED:
+        return f"Property '{attribute}' was removed"
+
+    elif child['type'] == CHANGED:
+        return f"Property '{attribute}' was updated. " \
+               f"From {prepare_value(child['old_value'])} " \
+               f"to {prepare_value(child['new_value'])}"
+
+
+def prepare_value(value):
     if isinstance(value, dict):
         return '[complex value]'
-    if isinstance(value, str):
+    elif isinstance(value, str):
         return f'\'{value}\''
-    return value
-
-
-def to_plain(diff: dict, parent=None):
-    strings = []
-    for n in diff['children']:
-        path = get_whole_path(n['key'], parent)
-        if n['type'] == ADDED:
-            strings.append(f"Property '{path}' was added with value:"
-                           f" {check_value(n['value'])}")
-        elif n['type'] == REMOVED:
-            strings.append(f"Property '{path}' was removed")
-        elif n['type'] == CHANGED:
-            strings.append(f"Property '{path}' was updated. "
-                           f"From {check_value(n['old_value'])} "
-                           f"to {check_value(n['new_value'])}")
-        elif n['type'] == NESTED:
-            strings.append(to_plain(n, path))
-    result = '\n'.join(strings)
-    result = result.replace('True', 'true').replace('False', 'false').\
-        replace('None', 'null')
-    return result
+    elif isinstance(value, bool):
+        return f'{value}'.replace('True', 'true').replace('False', 'false')
+    else:
+        return f'{value}'.replace('None', 'null')
