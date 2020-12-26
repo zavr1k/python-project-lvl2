@@ -1,9 +1,8 @@
-from gendiff.tree import ADDED, REMOVED, CHANGED, NESTED
+from gendiff.tree import ADDED, REMOVED, CHANGED, NESTED, NO_CHANGED
 
 
 def to_plain(diff: dict) -> str:
     strings = add_children(diff['children'])
-    strings = list(filter(lambda l: l is not None, strings))
     return '\n'.join(strings)
 
 
@@ -15,7 +14,9 @@ def add_children(children: list, ancestry=None) -> list:
         else:
             attribute = f'{ancestry}.{child["key"]}'
 
-        if child['type'] == NESTED:
+        if child['type'] == NO_CHANGED:
+            continue
+        elif child['type'] == NESTED:
             strings.extend(add_children(child["children"], attribute))
         else:
             strings.append(add_row(child, attribute))

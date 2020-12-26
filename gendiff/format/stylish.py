@@ -5,7 +5,8 @@ def prepare(value, indent):
     if isinstance(value, dict):
         return prepare_dict(value, indent)
     else:
-        return value
+        return str(value).replace('True', 'true').replace('False', 'false').\
+            replace('None', 'null')
 
 
 def prepare_dict(value, indent):
@@ -41,6 +42,4 @@ def stylish(diff: dict, indent=2):
                 f'{spacer}  {n["key"]}: {stylish(n, indent=indent + 4)}\n'
     else:
         result += f'{spacer[2:]}' + '}'
-    result = result.replace('True', 'true').replace('False', 'false').\
-        replace('None', 'null')
     return result
