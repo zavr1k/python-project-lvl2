@@ -2,6 +2,7 @@ from pathlib import Path
 
 import pytest
 import json
+import tempfile
 
 from gendiff import generate_diff
 
@@ -53,3 +54,9 @@ def test_json_formatter():
     json1 = json.loads(diff)
     json2 = json.loads(read_file('result_json.json'))
     assert json1 == json2
+
+
+def test_with_unsupported_file_format():
+    wrong_file = tempfile.NamedTemporaryFile(suffix='.txt')
+    diff = generate_diff(path_to(wrong_file.name), path_to('file1.json'))
+    assert diff == 'Unsupported file extension'
