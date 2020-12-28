@@ -1,4 +1,4 @@
-from gendiff.tree import ADDED, REMOVED, CHANGED, NO_CHANGED, NESTED
+from gendiff.tree import ADDED, REMOVED, CHANGED, UNCHANGED, NESTED
 
 
 def prepare(value, indent):
@@ -35,7 +35,7 @@ def stylish(diff: dict, indent=2):
                 f'{spacer}- {n["key"]}: {prepare(n["old_value"], indent)}\n'
             result += \
                 f'{spacer}+ {n["key"]}: {prepare(n["new_value"], indent)}\n'
-        elif n['type'] == NO_CHANGED:
+        elif n['type'] == UNCHANGED:
             result += f'{spacer}  {n["key"]}: {prepare(n["value"], indent)}\n'
         elif n['type'] == NESTED:
             result += \
