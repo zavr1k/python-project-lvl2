@@ -44,5 +44,7 @@ def prepare_value(value):
         return f'\'{value}\''
     elif isinstance(value, bool):
         return f'{value}'.lower()
+    elif isinstance(value, int):
+        return str(int)
     else:
         return 'null'
