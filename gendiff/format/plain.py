@@ -2,8 +2,8 @@ from gendiff.tree import ADDED, REMOVED, CHANGED, NESTED, UNCHANGED
 
 
 def to_plain(diff: dict) -> str:
-    strings = add_children(diff['children'])
-    return '\n'.join(strings)
+    changes = add_children(diff['children'])
+    return '\n'.join(changes)
 
 
 def add_children(children: list, ancestry=None) -> list:
@@ -43,6 +43,6 @@ def prepare_value(value):
     elif isinstance(value, str):
         return f'\'{value}\''
     elif isinstance(value, bool):
-        return f'{value}'.replace('True', 'true').replace('False', 'false')
+        return f'{value}'.lower()
     else:
-        return f'{value}'.replace('None', 'null')
+        return 'null'
