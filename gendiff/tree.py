@@ -32,9 +32,9 @@ def add_children(file1: dict, file2: dict) -> list:
                 'type': NESTED,
                 'children': add_children(file1[key], file2[key])
             })
-        elif not (isinstance(file1[key], dict)
-                  and isinstance(file2[key], dict)) and \
-                file1[key] != file2[key]:
+        elif not (isinstance(file1[key], dict)  # noqa W503
+                  and isinstance(file2[key], dict)) \
+                and file1[key] != file2[key]:  # noqa W503
             result.append({
                 'key': key,
                 'type': CHANGED,
