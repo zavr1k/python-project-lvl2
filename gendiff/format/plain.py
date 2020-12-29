@@ -45,6 +45,6 @@ def prepare_value(value):
     elif isinstance(value, bool):
         return f'{value}'.lower()
     elif isinstance(value, int):
-        return str(int)
+        return str(value)
     else:
         return 'null'
