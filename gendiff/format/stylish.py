@@ -22,7 +22,7 @@ def prepare_dict(value, indent):
     return result
 
 
-def stylish(diff: dict, indent=2):
+def transform(diff: dict, indent=2):
     spacer = ' ' * indent
     result = '{\n'
     for n in diff['children']:
@@ -39,7 +39,6 @@ def stylish(diff: dict, indent=2):
             result += f'{spacer}  {n["key"]}: {prepare(n["value"], indent)}\n'
         elif n['type'] == NESTED:
             result += \
-                f'{spacer}  {n["key"]}: {stylish(n, indent=indent + 4)}\n'
-    else:
-        result += f'{spacer[2:]}' + '}'
+                f'{spacer}  {n["key"]}: {transform(n, indent=indent + 4)}\n'
+    result += f'{spacer[2:]}' + '}'
     return result

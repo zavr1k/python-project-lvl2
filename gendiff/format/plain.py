@@ -1,7 +1,7 @@
 from gendiff.tree import ADDED, REMOVED, CHANGED, NESTED, UNCHANGED
 
 
-def to_plain(diff: dict) -> str:
+def transform(diff: dict) -> str:
     changes = add_children(diff['children'])
     return '\n'.join(changes)
 
@@ -9,17 +9,15 @@ def to_plain(diff: dict) -> str:
 def add_children(children: list, ancestry=None) -> list:
     strings = []
     for child in children:
-        if ancestry is None:
-            attribute = child['key']
-        else:
-            attribute = f'{ancestry}.{child["key"]}'
+        if ancestry:
+            child['key'] = ancestry + child['key']
 
         if child['type'] == UNCHANGED:
             continue
         elif child['type'] == NESTED:
-            strings.extend(add_children(child["children"], attribute))
+            strings.extend(add_children(child["children"], f'{child["key"]}.'))
         else:
-            strings.append(add_row(child, attribute))
+            strings.append(add_row(child, child['key']))
     return strings
 
 
@@ -42,9 +40,5 @@ def prepare_value(value):
         return '[complex value]'
     elif isinstance(value, str):
         return f'\'{value}\''
-    elif isinstance(value, bool):
-        return f'{value}'.lower()
-    elif isinstance(value, int):
-        return str(value)
     else:
-        return 'null'
+        return f'{value}'.replace('None', 'null').lower()
