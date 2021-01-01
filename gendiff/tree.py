@@ -4,44 +4,40 @@ ADDED, REMOVED, CHANGED, UNCHANGED, NESTED, ROOT = \
 
 def add_children(file1: dict, file2: dict) -> list:
     result = []
-    for key in file2.keys() - file1.keys():
-        result.append({
-            'key': key,
-            'type': ADDED,
-            'value': file2[key]
-        })
+    common_keys = file1.keys() | file2.keys()
 
-    for key in file1.keys() - file2.keys():
-        result.append({
-            'key': key,
-            'type': REMOVED,
-            'value': file1[key]
-        })
-
-    for key in file1.keys() & file2.keys():
-        if file1[key] == file2[key]:
+    for key in common_keys:
+        if key not in file1:
+            result.append({
+                'key': key,
+                'type': ADDED,
+                'value': file2[key]
+            })
+        elif key not in file2:
+            result.append({
+                'key': key,
+                'type': REMOVED,
+                'value': file1[key]
+            })
+        elif file1[key] == file2[key]:
             result.append({
                 'key': key,
                 'type': UNCHANGED,
                 'value': file2[key]
             })
-        elif (isinstance(file1[key], dict) and isinstance(file2[key], dict)) \
-                and file1[key] != file2[key]:
+        elif isinstance(file1[key], dict) and isinstance(file2[key], dict):
             result.append({
                 'key': key,
                 'type': NESTED,
                 'children': add_children(file1[key], file2[key])
             })
-        elif not (isinstance(file1[key], dict)  # noqa W503
-                  and isinstance(file2[key], dict)) \
-                and file1[key] != file2[key]:  # noqa W503
+        else:
             result.append({
                 'key': key,
                 'type': CHANGED,
                 'old_value': file1[key],
                 'new_value': file2[key]
             })
-
     return sorted(result, key=lambda x: x['key'])
 
 
