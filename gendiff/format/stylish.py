@@ -18,8 +18,7 @@ def prepare_dict(value, indent):
             result += f'{spacer}{key}: {prepare_value(value, indent + 4)}\n'
         else:
             result += f'{spacer}{key}: {value}\n'
-    else:
-        result += f'{spacer[4:]}' + '}'
+    result += f'{spacer[4:]}{chr(125)}'
     return result
 
 
