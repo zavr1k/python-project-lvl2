@@ -2,22 +2,20 @@ from gendiff.tree import ADDED, REMOVED, CHANGED, NESTED, UNCHANGED
 
 
 def transform(diff: dict) -> str:
-    changes = add_children(diff['children'])
+    changes = prepares_changes(diff)
     return '\n'.join(changes)
 
 
-def add_children(children: list, ancestry=None) -> list:
+def prepares_changes(node: dict, ancestry='') -> list:
     strings = []
-    for child in children:
-        if ancestry:
-            child['key'] = ancestry + child['key']
-
+    for child in node["children"]:
+        attribute = ancestry + child['key']
         if child['type'] == UNCHANGED:
             continue
         elif child['type'] == NESTED:
-            strings.extend(add_children(child["children"], f'{child["key"]}.'))
+            strings.extend(prepares_changes(child, f'{attribute}.'))
         else:
-            strings.append(add_row(child, child['key']))
+            strings.append(add_row(child, attribute))
     return strings
 
 
