@@ -17,6 +17,6 @@ def get_data(filepath):
 
 
 def get_path(path):
-    based_path = pathlib.Path(__file__).parent.parent
+    based_path = pathlib.Path().cwd()
     absolute_path = based_path.joinpath(path)
     return absolute_path
