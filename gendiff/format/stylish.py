@@ -12,14 +12,23 @@ def prepare_value(value, indent):
 
 def prepare_dict(value, indent):
     spacer = ' ' * (indent + 6)
-    result = '{\n'
+    strings = ['{']
+    strings.extend(prepare_strings(value, indent))
+    strings.append(f'{spacer[4:]}{chr(125)}')
+    return '\n'.join(strings)
+
+
+def prepare_strings(value, indent):
+    spacer = ' ' * (indent + 6)
+    strings = []
     for key, value in value.items():
         if isinstance(value, dict):
-            result += f'{spacer}{key}: {prepare_value(value, indent + 4)}\n'
+            strings.append(f'{spacer}{key}: {chr(123)}')
+            strings.extend(prepare_strings(value, indent + 4))
+            strings.append(f'{spacer}{chr(125)}')
         else:
-            result += f'{spacer}{key}: {value}\n'
-    result += f'{spacer[4:]}{chr(125)}'
-    return result
+            strings.append(f'{spacer}{key}: {value}')
+    return strings
 
 
 def prepares_changes(tree: dict, indent=2) -> list:
