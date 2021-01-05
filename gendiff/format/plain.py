@@ -1,7 +1,7 @@
 from gendiff.tree import ADDED, REMOVED, CHANGED, NESTED, UNCHANGED
 
 
-def transform(diff: dict) -> str:
+def format_plain(diff: dict) -> str:
     changes = prepares_changes(diff)
     return '\n'.join(changes)
 

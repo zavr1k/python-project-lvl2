@@ -58,5 +58,6 @@ def test_json_formatter():
 
 def test_with_unsupported_file_format():
     wrong_file = tempfile.NamedTemporaryFile(suffix='.txt')
-    diff = generate_diff(path_to(wrong_file.name), path_to('file1.json'))
-    assert diff == 'Unsupported file extension'
+    with pytest.raises(ValueError):
+        generate_diff(path_to(wrong_file.name), path_to('file1.json'))
+

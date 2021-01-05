@@ -1,7 +1,7 @@
 import argparse
-from gendiff.format.json import transform as transform_json
-from gendiff.format.plain import transform as transform_plain
-from gendiff.format.stylish import transform as transform_stylish
+from gendiff.format.json import format_json
+from gendiff.format.plain import format_plain
+from gendiff.format.stylish import format_stylish
 
 
 def init_argparse():
@@ -18,8 +18,8 @@ def init_argparse():
 
 def formatter(diff, style='stylish'):
     if style == 'stylish':
-        return transform_stylish(diff)
+        return format_stylish(diff)
     if style == 'plain':
-        return transform_plain(diff)
+        return format_plain(diff)
     if style == 'json':
-        return transform_json(diff)
+        return format_json(diff)
