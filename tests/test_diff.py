@@ -60,4 +60,3 @@ def test_with_unsupported_file_format():
     wrong_file = tempfile.NamedTemporaryFile(suffix='.txt')
     with pytest.raises(ValueError):
         generate_diff(path_to(wrong_file.name), path_to('file1.json'))
-
