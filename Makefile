@@ -8,7 +8,7 @@ package-install:
 		@pip install dist/*.whl
 
 lint:
-		@poetry run flake8 gendiff
+		@poetry run flake8 gendiff tests
 
 uninstall:
 		@pip uninstall hexlet-code
