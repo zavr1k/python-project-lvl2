@@ -1,15 +1,7 @@
 import json
 import pathlib
-import sys
 
 import yaml
-
-
-def exception_handler(exception_type, exception, traceback):
-    print(f"{exception_type.__name__}: {exception}")
-
-
-sys.excepthook = exception_handler
 
 
 def get_data(filepath):
