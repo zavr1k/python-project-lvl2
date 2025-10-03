@@ -5,21 +5,23 @@ from gendiff.format.stylish import format_stylish
 
 
 def init_argparse():
-    parser = argparse.ArgumentParser(description='Generate difference')
-    parser.add_argument('first_file', type=str)
-    parser.add_argument('second_file', type=str)
-    parser.add_argument('--format', '-f',
-                        help='set format of output',
-                        default='stylish',
-                        choices=['stylish', 'plain', 'json']
-                        )
+    parser = argparse.ArgumentParser(description="Generate difference")
+    parser.add_argument("first_file", type=str)
+    parser.add_argument("second_file", type=str)
+    parser.add_argument(
+        "--format",
+        "-f",
+        help="set format of output",
+        default="stylish",
+        choices=["stylish", "plain", "json"],
+    )
     return parser
 
 
-def formatter(diff, style='stylish'):
-    if style == 'stylish':
+def formatter(diff, style="stylish"):
+    if style == "stylish":
         return format_stylish(diff)
-    if style == 'plain':
+    if style == "plain":
         return format_plain(diff)
-    if style == 'json':
+    if style == "json":
         return format_json(diff)

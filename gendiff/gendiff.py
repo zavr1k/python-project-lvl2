@@ -11,7 +11,7 @@ def read_file(filepath: str) -> tuple:
     return file, extension
 
 
-def generate_diff(path_file1, path_file2, style='stylish'):
+def generate_diff(path_file1, path_file2, style="stylish"):
     file1, extension1 = read_file(path_file1)
     file2, extension2 = read_file(path_file2)
     data1 = get_data(file1, extension1)
